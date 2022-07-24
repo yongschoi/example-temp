@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery.post demo</title>
+  <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+</head>
+<body>
+  <form>
+  	<input type="text" id="title"><br>
+    <textarea id="textarea_1" cols="30" rows="5"></textarea><br>
+  	<button>Click</button>
+  </form> 
+<script type="text/javascript">    
+const button = document.querySelector('button');
+
+button.addEventListener('click', event => {
+	var titleVal = $("input#title").val();
+	var textareaVal = $("textarea#textarea_1").val();
+	$.ajax({
+	    url: '/download',
+	    dataType: 'json',
+	    type: 'post',
+	    contentType: 'application/json',
+	    data: JSON.stringify( { "title": titleVal, "contents": textareaVal } ),
+	    processData: false,
+	    success: function( data, textStatus, jQxhr ){
+	        $('#response pre').html( JSON.stringify( data ) );
+	    },
+	    error: function( jqXhr, textStatus, errorThrown ){
+	        console.log( errorThrown );
+	    }
+	});
+});  
+
+</script> 
+</body>
+</html>
