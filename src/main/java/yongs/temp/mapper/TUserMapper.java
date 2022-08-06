@@ -6,5 +6,5 @@ import yongs.temp.vo.TUserVo;
 
 public interface TUserMapper {
 	public void insert(int id, String name);
-	public List<TUserVo> selectlist();
+	public List<TUserVo> selectList();
 }

@@ -27,7 +27,7 @@ public class TestService {
 		}
 	}
 	
-	public List<TUserVo> selectlist() throws Exception {
-		return mapper.selectlist();
+	public List<TUserVo> selectList() throws Exception {
+		return mapper.selectList();
 	}
 }

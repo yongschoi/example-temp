@@ -5,7 +5,7 @@
         INSERT INTO tuser (id, name) VALUES (#{id}, #{name}) 
     </insert>
     
-    <select id="selectlist" resultType="yongs.temp.vo.TUserVo">
+    <select id="selectList" resultType="yongs.temp.vo.TUserVo">
         SELECT id, name FROM tuser
     </select>
 </mapper>

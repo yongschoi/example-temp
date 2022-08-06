@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="yongs.temp.mapper.ItemMapper">
+    <insert id="insert"> 
+        INSERT INTO item (id, name, price) VALUES (#{id}, #{name}, #{price}) 
+    </insert>
+    
+    <select id="selectList" resultType="yongs.temp.vo.ItemVo">
+        SELECT id, name, price FROM item
+    </select>
+</mapper>
