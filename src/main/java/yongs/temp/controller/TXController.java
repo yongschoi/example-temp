@@ -19,8 +19,9 @@ public class TXController {
 	AService service;
 
 	@GetMapping("/init")
-	public void init() throws Exception {
+	public boolean init() throws Exception {
 		service.init();
+		return true;
 	}
 	
 	@GetMapping("/single")
