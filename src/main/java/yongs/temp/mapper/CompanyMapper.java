@@ -7,4 +7,5 @@ import yongs.temp.vo.CompanyVo;
 public interface CompanyMapper {
 	public void insert(CompanyVo companyVo);
 	public List<CompanyVo> selectList();
+	public void deleteAll();
 }

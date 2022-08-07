@@ -2,6 +2,7 @@ package yongs.temp.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.slf4j.Slf4j;
@@ -15,9 +16,9 @@ public class BService {
 	@Autowired
 	CompanyMapper mapper;
 	
-	@Transactional
-	public void insert(CompanyVo companyVo) throws Exception {
-		log.debug("<BService" + companyVo.getId() + "> This is Transactional Test");
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
+	public void createCompany(CompanyVo companyVo) {
+		log.debug("BService <" + companyVo.getId() + ">");
 		mapper.insert(companyVo);
 		throw new AppRuntimeException();
 	}

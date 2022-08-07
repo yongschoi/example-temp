@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.slf4j.Slf4j;
 import yongs.temp.exception.AppRuntimeException;
+import yongs.temp.mapper.CompanyMapper;
 import yongs.temp.mapper.ItemMapper;
 import yongs.temp.vo.CompanyVo;
 import yongs.temp.vo.ItemVo;
@@ -14,22 +15,55 @@ import yongs.temp.vo.ItemVo;
 @Service
 public class AService {
 	@Autowired
-	ItemMapper mapper;
+	ItemMapper itemMapper;
+	@Autowired
+	CompanyMapper companyMapper;	
+
 	@Autowired
 	BService service;
 	
 	@Transactional
-	public String insert(ItemVo itemVo, CompanyVo companyVo) throws Exception {
-		log.debug("<AService" + itemVo.getId() + "> This is Transactional Test");
-		var returnValue = ""; 
-		mapper.insert(itemVo);
-		
+	public String createSingle(ItemVo itemVo, CompanyVo companyVo) {
+		log.debug("AService.createItem <" + itemVo.getId() + ">");
+		var returnValue = "test"; 
+		itemMapper.insert(itemVo);
+
 		try {
-			service.insert(companyVo);
+			createCompany(companyVo);
 			returnValue = "SUCCESS";
 		} catch (AppRuntimeException are) {
-			returnValue = "FAIL";
+			returnValue = "FAIL-AppRuntime";
 		}
 		return returnValue;
+	}
+	
+	@Transactional
+	public void createCompany(CompanyVo companyVo) {
+		log.debug("AService.createCompany <" + companyVo.getId() + ">");
+		companyMapper.insert(companyVo);
+		throw new AppRuntimeException();
+	}
+
+	@Transactional
+	public String createMulti(ItemVo itemVo, CompanyVo companyVo) {
+		log.debug("AService.createMulti <" + itemVo.getId() + ">");
+		var returnValue = "test"; 
+		itemMapper.insert(itemVo);
+		// service.createCompany(companyVo);
+
+		try {
+			service.createCompany(companyVo);
+			returnValue = "SUCCESS";
+		} catch (AppRuntimeException are) {
+			returnValue = "FAIL-AppRuntime";
+		}
+
+		return returnValue;
+	}
+	@Transactional
+	public void init() {
+		log.debug("AService.init()");
+		itemMapper.deleteAll();
+		companyMapper.deleteAll();
 	}
 }
