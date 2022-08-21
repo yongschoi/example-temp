@@ -8,7 +8,7 @@ import javax.jws.WebService;
 
 import yongs.temp.vo.User;
 
-@WebService
+@WebService(targetNamespace = "http://ws.yongs.temp.com")
 public interface UserService {
     @WebMethod
     String getUserName(@WebParam(name = "userId") int userId);

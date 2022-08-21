@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import yongs.temp.inf.UserService;
 import yongs.temp.vo.User;
 
-@WebService(serviceName = "UserService")
+@WebService(serviceName = "UserService",
+targetNamespace = "http://ws.yongs.temp.com",
+endpointInterface = "yongs.temp.inf.UserService")
 @Service
 public class UserServiceImpl implements UserService {
 	private static User user1;
