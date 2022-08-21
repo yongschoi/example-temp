@@ -16,7 +16,7 @@ public class BService {
 	@Autowired
 	CompanyMapper mapper;
 	
-	@Transactional(propagation = Propagation.REQUIRES_NEW)
+	// @Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void createCompany(CompanyVo companyVo) {
 		log.debug("BService <" + companyVo.getId() + ">");
 		mapper.insert(companyVo);
